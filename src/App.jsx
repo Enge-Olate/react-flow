@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import ButtonPrimary from './components/button/ButtonPrimary';
+import './styles/global.css';
 
 function App() {
 const nome = 'Olate';
@@ -22,6 +23,7 @@ useEffect(()=>{
         onChange={name2 =>{setNname(name2.target.value)}}
       />
       <h2>{name}</h2>
+        <ButtonPrimary/>
     </>
   )
 }

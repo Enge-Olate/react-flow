@@ -1,0 +1,30 @@
+.btn{
+    padding: 10px 20px;
+    background-color: #4122d9;
+    color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    cursor:pointer;
+    font-size: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.bolha{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    animation: bolha 0.6s linear;
+    animation-delay: 0s;
+}
+@keyframes bolha{
+    0%{
+        tranform: scale(1);
+        opacity:1;
+    }
+    100%{
+        transform: scale(15);
+        opacity:0;
+    }
+}
