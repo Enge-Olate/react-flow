@@ -1,31 +1,38 @@
-import { useEffect, useState } from 'react';
-import ButtonPrimary from './components/button/ButtonPrimary';
-import './styles/global.css';
+import { useEffect, useState } from "react";
+import ButtonPrimary from "./components/button/ButtonPrimary";
+import Header from "./components/header/Header";
+import "./styles/global.css";
 
 function App() {
-const nome = 'Olate';
-const lista = ['banana', 'limão', 'abacate'];
-const [name, setNname] = useState('');
+  const nome = "Olate";
+  const lista = ["banana", "limão", "abacate"];
+  const [name, setNname] = useState("");
 
-useEffect(()=>{
-  console.log('nome mudou');
-},[name])
+  useEffect(() => {
+    console.log("nome mudou");
+  }, [name]);
   return (
     <>
-      <h1 className='nome'>{nome}</h1>
+      <header>
+        <Header title="Calculadora de IMC" />
+      </header>
+      <h1 className="nome">{nome}</h1>
       <ul>
-        {lista.map(item=>(
+        {lista.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-      <input type="text"
+      <input
+        type="text"
         value={name}
-        onChange={name2 =>{setNname(name2.target.value)}}
+        onChange={(name2) => {
+          setNname(name2.target.value);
+        }}
       />
       <h2>{name}</h2>
-        <ButtonPrimary/>
+      <ButtonPrimary label={"Calcular"} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

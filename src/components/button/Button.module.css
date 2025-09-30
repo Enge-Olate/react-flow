@@ -6,6 +6,7 @@
     border-radius: 5px;
     cursor:pointer;
     font-size: 20px;
+    font-family: monospace;
     position: relative;
     overflow: hidden;
 }

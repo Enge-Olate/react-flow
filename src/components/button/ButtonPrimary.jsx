@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styles from "./Button.module.css";
 
-function ButtonPrimary({ onClick, type = "button" }) {
-  const label = "Calcular";
+function ButtonPrimary({label, onClick, type = "button" }) {
   const [bolha, setBolha] = useState([]);
   const click = (e) => {
     console.log(e);
@@ -25,7 +24,7 @@ function ButtonPrimary({ onClick, type = "button" }) {
   };
   return (
     <button className={styles.btn} type={type} onClick={click}>
-      {label}
+        {label}
       {bolha.map((b)=>(
         <span key={b.id} className={styles.bolha} style={{left: bolha.x, top: bolha.y}}></span>
       ))}
