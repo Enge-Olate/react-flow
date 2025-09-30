@@ -1,0 +1,10 @@
+.form{
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+}
+.form > input{
+    width: 150px;
+    margin: 10px 10px;
+
+}

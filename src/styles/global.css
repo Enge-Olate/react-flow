@@ -10,3 +10,8 @@ body{
   margin: 5dvh 10dvw;
   max-width: 1280px;
 }
+main{
+    padding: 10px 20px;
+    background-color: #ffd1ff;
+
+}
