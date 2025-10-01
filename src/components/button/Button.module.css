@@ -10,25 +10,8 @@
     font-size: 20px;
     font-family: monospace;
     font-weight: 700;
-    position: relative;
-    overflow: hidden;
 }
-.bolha{
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    animation: bolha 0.6s ease-out;
-    animation-delay: 0s;
-}
-@keyframes bolha{
-    0%{
-        tranform: scale(1);
-        opacity:1;
-    }
-    100%{
-        transform: scale(15);
-        opacity:0;
-    }
+.btn:hover{
+    background-color: #2c0bb8;
+    transition: all 0.3s ease-in-out;
 }

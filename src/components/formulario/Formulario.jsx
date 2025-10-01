@@ -7,8 +7,8 @@ function Formulario({ type, onSubmit }) {
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
 
-  const { imc } = useIMC(peso, altura);
-  
+  const { imc, classificacao } = useIMC(peso, altura);
+
   const handleClick = () => {
     console.log(imc);
   };
@@ -32,7 +32,12 @@ function Formulario({ type, onSubmit }) {
           required
           max={2500}
         />
-        <ButtonPrimary  label={"Calcular"} onClick={handleClick} type="submit" />
+        <ButtonPrimary label={"Calcular"} onClick={handleClick} type="submit" />
+        {imc > 0 && (
+          <div className={styles.resultado}>
+            <h2>Seu IMC é: {imc} - {classificacao}</h2>
+          </div>
+        )}
       </form>
     </>
   );
