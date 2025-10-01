@@ -3,7 +3,7 @@ import Header from "./components/header/Header";
 import "./styles/global.css";
 
 function App() {
-  
+
   return (
     <>
       <header>

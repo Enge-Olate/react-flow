@@ -1,10 +1,21 @@
 .form{
     max-width: 400px;
     margin: 20px auto;
+    padding: 10px 20px;
     text-align: center;
+
 }
+
 .form > input{
     width: 150px;
     margin: 10px 10px;
-
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 700;
+    border-bottom: 1px solid #4122d9;
+}
+input::placeholder{
+    color: #000;
+    font-weight: 700;
+    opacity: 0.4;
 }

@@ -1,6 +1,7 @@
 .btn{
-    width: 100%;
+    width: 300px;
     padding: 10px 20px;
+    margin: 50px auto 0 auto;
     background-color: #4122d9;
     color: #f5f5f5;
     border: none;
@@ -8,6 +9,7 @@
     cursor:pointer;
     font-size: 20px;
     font-family: monospace;
+    font-weight: 700;
     position: relative;
     overflow: hidden;
 }
@@ -17,7 +19,7 @@
     height: 20px;
     background-color: rgba(255,255,255,0.5);
     border-radius: 50%;
-    animation: bolha 0.6s linear;
+    animation: bolha 0.6s ease-out;
     animation-delay: 0s;
 }
 @keyframes bolha{
