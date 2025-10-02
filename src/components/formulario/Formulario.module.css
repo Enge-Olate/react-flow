@@ -1,15 +1,23 @@
-.form{
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    text-align: center;
-
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
-.form > input{
-    width: 150px;
+.form{
+    max-width: 300px;
+    height: fit-content;
+    padding: 10px 20px;
+    padding: 10px;
+}
+form > div{
+    display: flex;
+    flex-direction: row;
+}
+div > input{
     margin: 10px 10px;
-    font-size: 20px;
+    width:100%;
+    font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 700;
     border-bottom: 1px solid #4122d9;
@@ -18,4 +26,21 @@ input::placeholder{
     color: #000;
     font-weight: 700;
     opacity: 0.4;
+}
+hr{
+    width:250px;
+    margin: 5px auto;
+    border: 0.5px solid #4122d9;
+}
+div > table{
+    margin: 10px auto;
+    border-collapse: collapse;
+    width: 50%;
+}
+table, th, td{
+    border: 1px ridge #4122d9;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 700;
 }
