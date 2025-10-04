@@ -1,11 +1,8 @@
-// 4. Extensão .tsx removida da importação
 import ButtonPrimary from "../button/ButtonPrimary.tsx";
 import styles from "./Formulario.module.css";
 import React, { useState } from "react";
 
-// 2. Prop 'type' removida, pois não é usada de forma válida
 type FormularioProps = {
-  // A prop onSubmit externa pode ser mantida se o pai precisar saber da submissão
   onSubmit?: (imc: string, classificacao: string) => void;
 };
 
@@ -15,19 +12,21 @@ function Formulario({ onSubmit }: FormularioProps) {
   const [imc, setImc] = useState<string | null>(null);
   const [classificacao, setClassificacao] = useState<string>("");
 
-  // 1. A lógica foi movida para uma função `handleSubmit`
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Previne o recarregamento da página
-    
-    // 3. Usando parseFloat para mais precisão
+
     const pesoNum = parseFloat(peso);
     const alturaNum = parseFloat(altura);
 
     if (pesoNum > 0 && alturaNum > 0) {
       const alturaEmMetros = alturaNum / 100;
+<<<<<<< HEAD
       const imcCalculado = pesoNum / (alturaEmMetros **2 );
+=======
+      const imcCalculado = pesoNum / alturaEmMetros ** 2;
+>>>>>>> 233371b (Adicionando responsividade.)
       const imcFormatado = imcCalculado.toFixed(2);
-      
+
       let novaClassificacao = "";
       if (imcCalculado < 17) {
         novaClassificacao = "Muito abaixo do peso";
@@ -44,15 +43,13 @@ function Formulario({ onSubmit }: FormularioProps) {
       } else {
         novaClassificacao = "Obesidade grau 3";
       }
-      
+
       setImc(imcFormatado);
       setClassificacao(novaClassificacao);
 
-      // Se o componente pai precisar dos dados, podemos chamar a prop onSubmit
       if (onSubmit) {
         onSubmit(imcFormatado, novaClassificacao);
       }
-
     } else {
       alert("Por favor, insira valores válidos para peso e altura.");
     }
@@ -60,7 +57,6 @@ function Formulario({ onSubmit }: FormularioProps) {
 
   return (
     <div>
-      {/* 1. O evento onSubmit agora está no form, e o atributo 'type' foi removido */}
       <form className={styles.form} onSubmit={handleSubmit}>
         <div>
           <input
@@ -77,10 +73,9 @@ function Formulario({ onSubmit }: FormularioProps) {
             type="number"
             placeholder="Altura (cm)"
             required
-            max={250} // Ajustei para 250cm, 2500cm seria 25 metros
+            max={250} 
           />
         </div>
-        {/* 1. O onClick foi removido do botão. Ele apenas submete o formulário. */}
         <ButtonPrimary label={"Calcular"} type="submit" />
       </form>
       <hr />
@@ -124,7 +119,8 @@ function Formulario({ onSubmit }: FormularioProps) {
             <td>Obesidade II (severa)</td>
           </tr>
           <tr>
-            <td>Maior ou igual a 40</td> {/* Corrigi a última linha da tabela para maior clareza */}
+            <td>Maior ou igual a 40</td>{" "}
+            {/* Corrigi a última linha da tabela para maior clareza */}
             <td>Obesidade III (mórbida)</td>
           </tr>
         </tbody>
