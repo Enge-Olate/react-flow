@@ -25,12 +25,6 @@ export default defineConfig([
     rules: {
       "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
     },
-    parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
-    extends: [
-      "@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-    ],
+    
   },
 ]);
