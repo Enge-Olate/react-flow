@@ -20,11 +20,7 @@ function Formulario({ onSubmit }: FormularioProps) {
 
     if (pesoNum > 0 && alturaNum > 0) {
       const alturaEmMetros = alturaNum / 100;
-<<<<<<< HEAD
-      const imcCalculado = pesoNum / (alturaEmMetros **2 );
-=======
       const imcCalculado = pesoNum / alturaEmMetros ** 2;
->>>>>>> 233371b (Adicionando responsividade.)
       const imcFormatado = imcCalculado.toFixed(2);
 
       let novaClassificacao = "";
