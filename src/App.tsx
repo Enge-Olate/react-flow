@@ -1,16 +1,14 @@
 import Formulario from "./components/formulario/Formulario.tsx";
 import Header from "./components/header/Header.tsx";
-import './styles/global.module.css';
+import './App.module.css';
 
 function App() {
   return (
     <>
-      <header>
         <Header title="Calculadora de IMC" />
-      </header>
       <main>
         <aside>
-          <h2>O que é IMC</h2>
+          <h2>O que é IMC?</h2>
           <p>
             O Índice de Massa Corporal (IMC) é uma medida internacional usada
             para calcular se uma pessoa está no peso ideal, acima do peso ou
@@ -23,7 +21,7 @@ function App() {
             <i>Saiba mais sobre IMC</i>
           </a>
         </aside>
-        <Formulario type="submit" onSubmit={(e) => e.preventDefault()} />
+        <Formulario  />
       </main>
     </>
   );

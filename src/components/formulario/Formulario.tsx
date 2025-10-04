@@ -25,7 +25,7 @@ function Formulario({ onSubmit }: FormularioProps) {
 
     if (pesoNum > 0 && alturaNum > 0) {
       const alturaEmMetros = alturaNum / 100;
-      const imcCalculado = pesoNum / (alturaEmMetros * alturaEmMetros);
+      const imcCalculado = pesoNum / (alturaEmMetros **2 );
       const imcFormatado = imcCalculado.toFixed(2);
       
       let novaClassificacao = "";
