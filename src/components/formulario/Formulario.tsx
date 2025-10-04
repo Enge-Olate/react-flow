@@ -1,17 +1,24 @@
-import ButtonPrimary from "../button/ButtonPrimary";
+import ButtonPrimary from "../button/ButtonPrimary.tsx";
 import styles from "./Formulario.module.css";
-import { useState } from "react";
+import React, { useState } from "react";
+type FormularioProps = {
+  type: string;
+  onSubmit?:(e: React.FormEvent<HTMLFormElement>)=> void;
+}
 
-function Formulario({ type, onSubmit }) {
-  const [peso, setPeso] = useState("");
-  const [altura, setAltura] = useState("");
-  const [imc, setImc] = useState(null);
-  const [classificacao, setClassificacao] = useState("");
+function Formulario({ type, onSubmit }:FormularioProps) {
+  const [peso, setPeso] = useState<string>("");
+  const [altura, setAltura] = useState<string>("");
+  const [imc, setImc] = useState<string | null>(null);
+  const [classificacao, setClassificacao] = useState<string>("");
 
-  function handleClick() {
-    if (peso > 0 && altura > 0) {
-      const alturaEmMetros = altura / 100;
-      const imcCalculado = peso / (alturaEmMetros * alturaEmMetros);
+  function handleClick(e:React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const pesoNum = parseInt(peso);
+    const alturaNum = parseInt(altura);
+    if (pesoNum > 0 && alturaNum > 0) {
+      const alturaEmMetros = alturaNum / 100;
+      const imcCalculado = pesoNum / (alturaEmMetros * alturaEmMetros);
       setImc(imcCalculado.toFixed(2));
       if (imcCalculado < 17) {
         setClassificacao("Muito abaixo do peso");

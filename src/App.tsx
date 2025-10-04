@@ -1,5 +1,5 @@
-import Formulario from "./components/formulario/Formulario.js";
-import Header from "./components/header/Header.js";
+import Formulario from "./components/formulario/Formulario.tsx";
+import Header from "./components/header/Header.tsx";
 import './styles/global.module.css';
 
 function App() {
