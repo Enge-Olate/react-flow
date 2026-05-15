@@ -1,4 +1,7 @@
-.header{
+
+import styled from "styled-components";
+
+export const HeaderPage = styled.header`
     width: 100%;
     padding:10px 20px;
     background-color: #4122d9;
@@ -7,10 +10,11 @@
     font-family: monospace;
     color:#f5f5f5;
     border-radius: 5px;
-}
-@media screen and (max-width: 768px) {
-    .header{
+
+    @media screen and (max-width: 768px){
+        padding: 10px 0;
         font-size: 24px;
-        padding:10px 0;
+    
     }
-}
+
+`

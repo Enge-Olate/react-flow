@@ -1,11 +1,11 @@
-import styles from './Header.module.css'
+import { HeaderPage } from './style';
 type Props ={
     title: string
 }
 function Header({title}:Props){
 
     return(
-        <header className={styles.header}>{title}</header>
+        <HeaderPage>{title}</HeaderPage>
     )
 }
 export default Header;

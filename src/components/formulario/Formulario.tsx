@@ -1,6 +1,6 @@
 import ButtonPrimary from "../button/ButtonPrimary.tsx";
-import styles from "./Formulario.module.css";
 import React, { useState } from "react";
+import { Container, FormPage, TablePage } from "./style.ts";
 
 type FormularioProps = {
   onSubmit?: (imc: string, classificacao: string) => void;
@@ -52,8 +52,8 @@ function Formulario({ onSubmit }: FormularioProps) {
   }
 
   return (
-    <div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+    <Container>
+      <FormPage onSubmit={handleSubmit}>
         <div>
           <input
             value={peso}
@@ -73,7 +73,7 @@ function Formulario({ onSubmit }: FormularioProps) {
           />
         </div>
         <ButtonPrimary label={"Calcular"} type="submit" />
-      </form>
+      </FormPage>
       <hr />
       {imc && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
@@ -81,8 +81,7 @@ function Formulario({ onSubmit }: FormularioProps) {
           <p style={{ fontWeight: "bold" }}>Classificação: {classificacao}</p>
         </div>
       )}
-      <table>
-        {/* O restante da tabela continua igual */}
+      <TablePage>
         <thead>
           <tr>
             <th colSpan={1}>IMC</th>
@@ -116,12 +115,11 @@ function Formulario({ onSubmit }: FormularioProps) {
           </tr>
           <tr>
             <td>Maior ou igual a 40</td>{" "}
-            {/* Corrigi a última linha da tabela para maior clareza */}
             <td>Obesidade III (mórbida)</td>
           </tr>
         </tbody>
-      </table>
-    </div>
+      </TablePage>
+    </Container>
   );
 }
 export default Formulario;

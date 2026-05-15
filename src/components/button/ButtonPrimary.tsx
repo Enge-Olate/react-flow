@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import { ButtonPage } from "./style";
 
 interface Props{
   label:string,
@@ -8,9 +8,9 @@ interface Props{
 function ButtonPrimary({label, type='button' }:Props) {
     
   return (
-    <button className={styles.btn} type={type}>
+    <ButtonPage type={type}>
         {label}
-    </button>
+    </ButtonPage>
   );
 }
 export default ButtonPrimary;

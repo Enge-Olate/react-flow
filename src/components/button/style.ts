@@ -1,4 +1,6 @@
-.btn{
+import styled from "styled-components";
+
+export const ButtonPage = styled.button`
     width: 100%;
     padding: 10px 20px;
     margin-top: 20px;
@@ -11,8 +13,9 @@
     font-family: monospace;
     font-weight: 700;
     
-}
-.btn:hover{
-    background-color: #2c0bb8;
-    transition: all 0.3s ease-in-out;
-}
+    &::hover{
+        background-color: #2c0bb8;
+        transition: all 0.3s ease-in-out;
+    }
+
+`

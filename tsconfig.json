@@ -4,14 +4,14 @@
     // File Layout
      "rootDir": "./src",
     "outDir": "./dist",
-
+    "moduleResolution": "bundler",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
+    "module": "es2015",
+    "target": "es2022",
     "types": [],
     // For nodejs:
-    // "lib": ["esnext"],
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     // "types": ["node"],
     // and npm install -D @types/node
 
@@ -34,6 +34,9 @@
 
     // Recommended Options
     "strict": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
@@ -41,7 +44,13 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+
+    "plugins": [
+      {
+        "name": "typescript-Styled-plugin"
+      }
+    ]
   },
 
   "include": ["src"],
