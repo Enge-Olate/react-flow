@@ -1,55 +1,68 @@
 import ButtonPrimary from "../button/ButtonPrimary.tsx";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Container, FormPage, TablePage } from "./style.ts";
 
 type FormularioProps = {
-  onSubmit?: (imc: string, classificacao: string) => void;
+  onSubmit?: (calcImc: string, classificacao: string) => void;
 };
 
 function Formulario({ onSubmit }: FormularioProps) {
   const [peso, setPeso] = useState<string>("");
   const [altura, setAltura] = useState<string>("");
-  const [imc, setImc] = useState<string | null>(null);
-  const [classificacao, setClassificacao] = useState<string>("");
+  const [result, setResult] = useState<boolean>(false);
+  const calcImc = useMemo(() => {
+    const p = parseFloat(peso);
+    const a = parseFloat(altura);
+    if (!p || !a || a === 0) {
+      return null;
+    }
+    const alturaMetro = a / 100;
+    const calculo = p / (alturaMetro * alturaMetro);
+    return calculo.toFixed(2);
+  }, [peso, altura]);
+
+  const classificacao = useMemo(() => {
+    if (!calcImc) {
+      return null;
+    }
+    const valor = parseFloat(calcImc);
+    let novaClassificacao = "";
+    if (valor < 17) {
+      novaClassificacao = "Muito abaixo do peso";
+    } else if (valor < 18.5) {
+      novaClassificacao = "Abaixo do peso";
+    } else if (valor < 25) {
+      novaClassificacao = "Peso normal";
+    } else if (valor < 30) {
+      novaClassificacao = "Acima do peso";
+    } else if (valor < 35) {
+      novaClassificacao = "Obesidade 1";
+    } else if (valor < 40) {
+      novaClassificacao = "Obesidade grau 2 (severa)";
+    } else {
+      novaClassificacao = "Obesidade grau 3";
+    }
+    return novaClassificacao;
+  }, [calcImc]);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Previne o recarregamento da página
-
-    const pesoNum = parseFloat(peso);
-    const alturaNum = parseFloat(altura);
-
-    if (pesoNum > 0 && alturaNum > 0) {
-      const alturaEmMetros = alturaNum / 100;
-      const imcCalculado = pesoNum / alturaEmMetros ** 2;
-      const imcFormatado = imcCalculado.toFixed(2);
-
-      let novaClassificacao = "";
-      if (imcCalculado < 17) {
-        novaClassificacao = "Muito abaixo do peso";
-      } else if (imcCalculado < 18.5) {
-        novaClassificacao = "Abaixo do peso";
-      } else if (imcCalculado < 25) {
-        novaClassificacao = "Peso normal";
-      } else if (imcCalculado < 30) {
-        novaClassificacao = "Acima do peso";
-      } else if (imcCalculado < 35) {
-        novaClassificacao = "Obesidade 1";
-      } else if (imcCalculado < 40) {
-        novaClassificacao = "Obesidade grau 2 (severa)";
-      } else {
-        novaClassificacao = "Obesidade grau 3";
+    if (calcImc && classificacao) {
+      setResult(true);
+      if(onSubmit){
+        onSubmit(calcImc, classificacao);
       }
-
-      setImc(imcFormatado);
-      setClassificacao(novaClassificacao);
-
-      if (onSubmit) {
-        onSubmit(imcFormatado, novaClassificacao);
-      }
-    } else {
-      alert("Por favor, insira valores válidos para peso e altura.");
     }
   }
+
+  const handlePeso = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setPeso(e.target.value);
+    setResult(false);
+  };
+  const handleAltura = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setAltura(e.target.value);
+    setResult(false);
+  };
 
   return (
     <Container>
@@ -57,7 +70,7 @@ function Formulario({ onSubmit }: FormularioProps) {
         <div>
           <input
             value={peso}
-            onChange={(e) => setPeso(e.target.value)}
+            onChange={handlePeso}
             type="number"
             placeholder="Peso (kg)"
             required
@@ -65,19 +78,19 @@ function Formulario({ onSubmit }: FormularioProps) {
           />
           <input
             value={altura}
-            onChange={(e) => setAltura(e.target.value)}
+            onChange={handleAltura}
             type="number"
             placeholder="Altura (cm)"
             required
-            max={250} 
+            max={250}
           />
         </div>
         <ButtonPrimary label={"Calcular"} type="submit" />
       </FormPage>
       <hr />
-      {imc && (
+      {result && calcImc &&  (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <p style={{ fontWeight: "bold" }}>Seu IMC é: {imc}</p>
+          <p style={{ fontWeight: "bold" }}>Seu IMC é: {calcImc}</p>
           <p style={{ fontWeight: "bold" }}>Classificação: {classificacao}</p>
         </div>
       )}
@@ -114,12 +127,12 @@ function Formulario({ onSubmit }: FormularioProps) {
             <td>Obesidade II (severa)</td>
           </tr>
           <tr>
-            <td>Maior ou igual a 40</td>{" "}
-            <td>Obesidade III (mórbida)</td>
+            <td>Maior ou igual a 40</td> <td>Obesidade III (mórbida)</td>
           </tr>
         </tbody>
       </TablePage>
     </Container>
   );
 }
+
 export default Formulario;
