@@ -94,7 +94,7 @@ function Formulario({ onSubmit }: FormularioProps) {
       </FormPage>
       <hr />
       {result && calcImc && (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <div style={{ textAlign: "center", marginTop: "10px", animation: "fadeIn 0.5s" }}>
           <p style={{ fontWeight: "bold" }}>Seu IMC é: {calcImc}</p>
           <p style={{ fontWeight: "bold" }}>Classificação: {classificacao}</p>
         </div>
@@ -107,33 +107,12 @@ function Formulario({ onSubmit }: FormularioProps) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Abaixo de 17</td>
-            <td>Muito abaixo do peso</td>
+          {FAIXAS_IMC.map((faixa, index)=>(
+          <tr key={index} style={{transition: "all 0.3s ease"}}>
+            <td>{faixa.label}</td>
+            <td>{faixa.descricaoTabela}</td>
           </tr>
-          <tr>
-            <td>Entre 17 e 18,49</td>
-            <td>Abaixo do peso</td>
-          </tr>
-          <tr>
-            <td>Entre 18,5 e 24,99</td>
-            <td>Peso normal</td>
-          </tr>
-          <tr>
-            <td>Entre 25 e 29.99</td>
-            <td>Acima do peso</td>
-          </tr>
-          <tr>
-            <td>Entre 30 e 34,99</td>
-            <td>Obesidade I</td>
-          </tr>
-          <tr>
-            <td>Entre 35 e 39,99</td>
-            <td>Obesidade II (severa)</td>
-          </tr>
-          <tr>
-            <td>Maior ou igual a 40</td> <td>Obesidade III (mórbida)</td>
-          </tr>
+          ))}
         </tbody>
       </TablePage>
     </Container>
