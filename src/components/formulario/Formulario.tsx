@@ -2,9 +2,26 @@ import ButtonPrimary from "../button/ButtonPrimary.tsx";
 import React, { useMemo, useState } from "react";
 import { Container, FormPage, TablePage } from "./style.ts";
 
+type FaixaImc = {
+  limite: number;
+  label: string;
+  descricaoTabela: string;
+};
+
+const FAIXAS_IMC: ReadonlyArray<FaixaImc> = [
+  {limite: 17, label:"Muito abaixo do peso", descricaoTabela: "Abaixo de 17"},
+  {limite: 18.5, label:"Abaixo do peso", descricaoTabela: "Entre 17 e 18,49"},
+  {limite: 25, label:"Peso normal", descricaoTabela: "Entre 18,5 e 24,99"},
+  {limite: 30, label:"Acima do peso", descricaoTabela: "Entre 25 e 29,99"},
+  {limite: 35, label:"Obesidade I", descricaoTabela: "Entre 30 e 34,99"},
+  {limite: 40, label:"Obesidade II (severa)", descricaoTabela: "Entre 35 e 39,99"},
+  {limite: Infinity, label:"Obesidade III (mórbida)", descricaoTabela: "Maior ou igual a 40"},
+]
+
 type FormularioProps = {
   onSubmit?: (calcImc: string, classificacao: string) => void;
 };
+
 
 function Formulario({ onSubmit }: FormularioProps) {
   const [peso, setPeso] = useState<string>("");
@@ -23,43 +40,31 @@ function Formulario({ onSubmit }: FormularioProps) {
 
   const classificacao = useMemo(() => {
     if (!calcImc) {
-      return null;
+      return "";
     }
     const valor = parseFloat(calcImc);
-    let novaClassificacao = "";
-    if (valor < 17) {
-      novaClassificacao = "Muito abaixo do peso";
-    } else if (valor < 18.5) {
-      novaClassificacao = "Abaixo do peso";
-    } else if (valor < 25) {
-      novaClassificacao = "Peso normal";
-    } else if (valor < 30) {
-      novaClassificacao = "Acima do peso";
-    } else if (valor < 35) {
-      novaClassificacao = "Obesidade 1";
-    } else if (valor < 40) {
-      novaClassificacao = "Obesidade grau 2 (severa)";
-    } else {
-      novaClassificacao = "Obesidade grau 3";
-    }
-    return novaClassificacao;
+    const faixa = FAIXAS_IMC.find((regra)=>
+      valor < regra.limite
+    );
+    return faixa ? faixa.label:"";      
+    
   }, [calcImc]);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Previne o recarregamento da página
     if (calcImc && classificacao) {
       setResult(true);
-      if(onSubmit){
+      if (onSubmit) {
         onSubmit(calcImc, classificacao);
       }
     }
   }
 
-  const handlePeso = (e: React.ChangeEvent<HTMLInputElement>)=>{
+  const handlePeso = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPeso(e.target.value);
     setResult(false);
   };
-  const handleAltura = (e: React.ChangeEvent<HTMLInputElement>)=>{
+  const handleAltura = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAltura(e.target.value);
     setResult(false);
   };
@@ -88,7 +93,7 @@ function Formulario({ onSubmit }: FormularioProps) {
         <ButtonPrimary label={"Calcular"} type="submit" />
       </FormPage>
       <hr />
-      {result && calcImc &&  (
+      {result && calcImc && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <p style={{ fontWeight: "bold" }}>Seu IMC é: {calcImc}</p>
           <p style={{ fontWeight: "bold" }}>Classificação: {classificacao}</p>
